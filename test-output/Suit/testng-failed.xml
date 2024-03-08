@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suit]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="clicflyer.utilities.ExtentReporterNG"/>
+  </listeners>
+  <test thread-count="5" name="clicflyer_Web(failed)">
+    <classes>
+      <class name="clicflyer.testCases.TC_LoginTest_001">
+        <methods>
+          <include name="teardown"/>
+          <include name="setup"/>
+          <include name="loginTest"/>
+        </methods>
+      </class> <!-- clicflyer.testCases.TC_LoginTest_001 -->
+    </classes>
+  </test> <!-- clicflyer_Web(failed) -->
+</suite> <!-- Failed suite [Suit] -->

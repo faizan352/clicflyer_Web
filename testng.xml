@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suit">
+	
+	<listeners>
+		<listener class-name="clicflyer.utilities.ExtentReporterNG" />
+	</listeners>
+
+	<test name="clicflyer_Web">
+		<classes>
+			<class name="clicflyer.testCases.TC_LoginTest_001">
+				<methods>
+					<include name="loginTest">
+						
+					</include>
+				</methods>
+			</class>
+
+		</classes>
+	</test>
+</suite>
