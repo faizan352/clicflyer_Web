@@ -16,10 +16,10 @@ public class LoginPage {
 		
 	}
 	
-	@FindBy (xpath = "//header/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/a[1]/span[1]")
+	@FindBy (xpath = "//span[@class='hidden-xs'][normalize-space()='Login']")
 	WebElement clickLogin;
 	
-	@FindBy(xpath ="//body/div[@id='login-popup']/div[1]/div[1]/div[1]/div[2]/div[1]/div[3]/form[1]/div[1]/input[1]")
+	@FindBy(xpath ="//form[@id='loginuser']//input[@id='Email']")
 	WebElement txtUserName;
 	
 	@FindBy(xpath="//input[@id='Password']")
@@ -31,15 +31,12 @@ public class LoginPage {
 	public void clickLogin(){
 		clickLogin.click();
 	}
-	
 	public void setUserName(String username){
 		txtUserName.sendKeys(username);
 	}
-	
 	public void setPassword(String password){
 		txtPassword.sendKeys(password);
 	}
-	
 	public void clickSubmit(){
 		btnLogin.click();
 	}
