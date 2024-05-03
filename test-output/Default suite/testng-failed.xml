@@ -3,13 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="clicflyer.testCases.TC_LoginTest_001">
+      <class name="clicflyer.testCases.TestData1">
         <methods>
-          <include name="teardown"/>
-          <include name="setup"/>
-          <include name="loginTest"/>
+          <include name="excelCheck"/>
         </methods>
-      </class> <!-- clicflyer.testCases.TC_LoginTest_001 -->
+      </class> <!-- clicflyer.testCases.TestData1 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

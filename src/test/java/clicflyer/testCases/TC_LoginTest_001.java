@@ -19,24 +19,21 @@ public class TC_LoginTest_001 extends BaseClass
 	@Test(priority = 1)
 	public void loginTest() throws InterruptedException, IOException
 	{
-		Logger log=Logger.getLogger(TC_LoginTest_001.class);
+		//Logger log=Logger.getLogger(TC_LoginTest_001.class);
 		driver.get(baseURL);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		log.info("URL is oepn");
-//		Xls_Reader reader= new Xls_Reader("C:\\Users\\MohdFaizanAnsari\\eclipse-workspace\\clicflyer_Web\\test-input\\testData.xlsx");
-//		String Username= reader.getCellData("login","username", 2);
-//		System.out.println(Username);
+	//	log.info("URL is oepn");
+		Xls_Reader reader= new Xls_Reader();
+		String Username= reader.getCellData("Sheet1","username", 2);
+		String Password= reader.getCellData("Sheet1","password", 2);
 		LoginPage lp= new LoginPage(driver);
 		lp.clickLogin();
-		lp.setUserName(username);
-		Reporter.log( "Message", true );
-
-	//	System.out.println("Working");
-		log.info("Enter username");	
-	//	System.out.println("Working");
+		lp.setUserName(Username);
+	//	Reporter.log( "Message", true );
+	//	log.info("Enter username");	
 		Thread.sleep(2000);
-		lp.setPassword(password);
-		log.info("Enter password");
+		lp.setPassword(Password);
+	//	log.info("Enter password");
 		lp.clickSubmit();
 		
 //		if(driver.getTitle().equals("Best KSA Price & Offers in  Riyadh in Panda, Lulu, Othaim, Danube, Nesto, Dukan"))

@@ -1,50 +1,51 @@
 package clicflyer.utilities;
 
-/**
- * @author NaveenKhunteta
- * Created Date: Dec 25th, 2019
- * mail me at naveenanimation20@gmail.com in case of any PR or query
- * Licensed under NaveenAutomation Labs
- */
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Calendar;
 
-import org.apache.poi.ss.usermodel.DateUtil;
 //import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 //import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class Xls_Reader {
-	public String path;
+//import com.common.WebLogging;
+
+public class Xls_Reader{
+	
+	
+	public String path="C:\\Users\\MohdFaizanAnsari\\eclipse-workspace\\clicflyer_Web\\test-input\\testData.xlsx";
 	public FileInputStream fis = null;
 	public FileOutputStream fileOut = null;
 	private XSSFWorkbook workbook = null;
 	private XSSFSheet sheet = null;
 	private XSSFRow row = null;
 	private XSSFCell cell = null;
+	//private WebLogging logging=null;
 
-	public Xls_Reader(String path) {
-
-		this.path = path;
+	public Xls_Reader(){
+		
+		//this.path = path;
 		try {
+			//logging=new WebLogging("AL","Testing","AppConfigurations");
+			//logging.logDebugInfo("In method Xls_Reader(Constructor) of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheetAt(0);
 			fis.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//logging.logErrorInfo("Error In method Xls_Reader(Constructor) of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	// returns the row count in a sheet
 
 	public int getRowCount(String sheetName) {
+		//logging.logDebugInfo("In method getRowCount of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		int index = workbook.getSheetIndex(sheetName);
 		if (index == -1)
 			return 0;
@@ -66,7 +67,9 @@ public class Xls_Reader {
 	 * @return
 	 */
 	// returns the data from a cell
+	@SuppressWarnings("static-access")
 	public String getCellData(String sheetName, String colName, int rowNum) {
+		//logging.logDebugInfo("In method getCellData of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		try {
 			if (rowNum <= 0)
 				return "";
@@ -107,6 +110,7 @@ public class Xls_Reader {
 			else if ((cell.getCellType().name().equals("NUMERIC")) || (cell.getCellType().name().equals("FORMULA"))) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
+				//if (HSSFDateUtil.isCellDateFormatted(cell)) {
 				if (DateUtil.isCellDateFormatted(cell)) {
 					// format in form of M/D/YY
 					double d = cell.getNumericCellValue();
@@ -119,7 +123,7 @@ public class Xls_Reader {
 
 					// System.out.println(cellText);
 
-				}
+				} 
 
 				return cellText;
 			} else if (cell.getCellType().BLANK != null)
@@ -128,23 +132,17 @@ public class Xls_Reader {
 				return String.valueOf(cell.getBooleanCellValue());
 
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method getCellData of Xls_Reader Class.  message: "+e.getMessage());
 
 			e.printStackTrace();
 			return "row " + rowNum + " or column " + colName + " does not exist in xls";
 		}
 	}
 
-	/**
-	 * Code has been updated as per new POI version - 4.x.x
-	 * 
-	 * @author NaveenKhunteta
-	 * @param sheetName
-	 * @param colNum
-	 * @param rowNum
-	 * @return
-	 */
 	// returns the data from a cell
+	@SuppressWarnings("static-access")
 	public String getCellData(String sheetName, int colNum, int rowNum) {
+		//logging.logDebugInfo("In method getCellData of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		try {
 			if (rowNum <= 0)
 				return "";
@@ -189,7 +187,7 @@ public class Xls_Reader {
 
 				return cellText;
 			} else if (cell.getCellType().BLANK != null)
-				return " ";
+				return "";
 			else
 				return String.valueOf(cell.getBooleanCellValue());
 		} catch (Exception e) {
@@ -201,6 +199,7 @@ public class Xls_Reader {
 
 	// returns true if data is set successfully else false
 	public boolean setCellData(String sheetName, String colName, int rowNum, String data) {
+		//logging.logDebugInfo("In method setCellData of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		try {
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
@@ -246,6 +245,7 @@ public class Xls_Reader {
 			fileOut.close();
 
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method setCellData of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -320,6 +320,7 @@ public class Xls_Reader {
 
 	// returns true if sheet is created successfully else false
 	public boolean addSheet(String sheetname) {
+		//logging.logDebugInfo("In method addSheet of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 
 		FileOutputStream fileOut;
 		try {
@@ -328,6 +329,7 @@ public class Xls_Reader {
 			workbook.write(fileOut);
 			fileOut.close();
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method addSheet of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -337,6 +339,7 @@ public class Xls_Reader {
 	// returns true if sheet is removed successfully else false if sheet does
 	// not exist
 	public boolean removeSheet(String sheetName) {
+		//logging.logDebugInfo("In method removeSheet of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		int index = workbook.getSheetIndex(sheetName);
 		if (index == -1)
 			return false;
@@ -348,6 +351,7 @@ public class Xls_Reader {
 			workbook.write(fileOut);
 			fileOut.close();
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method removeSheet of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -356,9 +360,11 @@ public class Xls_Reader {
 
 	// returns true if column is created successfully
 	public boolean addColumn(String sheetName, String colName) {
+		//logging.logDebugInfo("In method addColumn of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		// System.out.println("**************addColumn*********************");
 
 		try {
+			
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
 			int index = workbook.getSheetIndex(sheetName);
@@ -391,6 +397,7 @@ public class Xls_Reader {
 			fileOut.close();
 
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method addColumn of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -401,7 +408,9 @@ public class Xls_Reader {
 
 	// removes a column and all the contents
 	public boolean removeColumn(String sheetName, int colNum) {
+		//logging.logDebugInfo("In method removeColumn of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		try {
+			
 			if (!isSheetExist(sheetName))
 				return false;
 			fis = new FileInputStream(path);
@@ -425,6 +434,7 @@ public class Xls_Reader {
 			workbook.write(fileOut);
 			fileOut.close();
 		} catch (Exception e) {
+			//logging.logErrorInfo("Error In method removeColumn of Xls_Reader Class.  message: "+e.getMessage());
 			e.printStackTrace();
 			return false;
 		}
@@ -434,6 +444,7 @@ public class Xls_Reader {
 
 	// find whether sheets exists
 	public boolean isSheetExist(String sheetName) {
+		//logging.logDebugInfo("In method isSheetExist of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		int index = workbook.getSheetIndex(sheetName);
 		if (index == -1) {
 			index = workbook.getSheetIndex(sheetName.toUpperCase());
@@ -447,6 +458,7 @@ public class Xls_Reader {
 
 	// returns number of columns in a sheet
 	public int getColumnCount(String sheetName) {
+		//	logging.logDebugInfo("In method getColumnCount of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 		// check if sheet exists
 		if (!isSheetExist(sheetName))
 			return -1;
@@ -486,6 +498,7 @@ public class Xls_Reader {
 	// return true;
 	// }
 	public int getCellRowNum(String sheetName, String colName, String cellValue) {
+		//logging.logDebugInfo("In method getCellRowNum of Xls_Reader class", WebLogging.LOG_TYPE_DEBUG);
 
 		for (int i = 2; i <= getRowCount(sheetName); i++) {
 			if (getCellData(sheetName, colName, i).equalsIgnoreCase(cellValue)) {
@@ -497,3 +510,5 @@ public class Xls_Reader {
 	}
 
 }
+
+

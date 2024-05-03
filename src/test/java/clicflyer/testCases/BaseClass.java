@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -14,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-
 import com.relevantcodes.extentreports.ExtentReports;
 
 import clicflyer.utilities.ReadConfig;
@@ -27,8 +25,8 @@ public class BaseClass {
 	ReadConfig readconfig= new ReadConfig();
 	//eadconfig.getApplicationURL();
 	public String baseURL="https://clicflyer.com/shoppers/en/saudi-arabia/riyadh/home#";
-	public String username="faizanm3522@gmail.com";
-	public String password="12345678";
+//	public String username="faizanm3522@gmail.com";
+//	public String password="12345678";
 	public static WebDriver driver;
 	
 	public static Logger logger;
